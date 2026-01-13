@@ -34,12 +34,6 @@ const Platforms = () => {
       <div className="absolute right-0 top-1/3 w-72 h-72 bg-accent/5 rounded-full blur-[120px]" />
 
       <div className="relative max-w-6xl mx-auto">
-        {/* Ad Banner - Top */}
-        <div className="flex justify-center mb-12">
-          <AdBanner size="leaderboard" className="hidden md:flex" />
-          <AdBanner size="mobile" className="md:hidden" />
-        </div>
-
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -147,12 +141,6 @@ const Platforms = () => {
             <span className="w-12 h-px bg-border" />
           </p>
         </motion.div>
-
-        {/* Ad Banner - Bottom */}
-        <div className="flex justify-center mt-12">
-          <AdBanner size="leaderboard" className="hidden md:flex" />
-          <AdBanner size="mobile" className="md:hidden" />
-        </div>
       </div>
     </section>
   );

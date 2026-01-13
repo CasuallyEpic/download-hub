@@ -95,12 +95,6 @@ const Features = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Ad Banner */}
-        <div className="flex justify-center mt-16">
-          <AdBanner size="leaderboard" className="hidden md:flex" />
-          <AdBanner size="mobile" className="md:hidden" />
-        </div>
       </div>
     </section>
   );

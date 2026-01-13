@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Download, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
@@ -7,8 +7,21 @@ import { Button } from "./ui/button";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isHome = location.pathname === "/";
+
+  const handleFeaturesClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isHome) {
+      document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/#features");
+      setTimeout(() => {
+        document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
@@ -41,23 +54,20 @@ const Navbar = () => {
               Downloader
             </Link>
             <a
-              href="#features"
+              href="/#features"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              onClick={(e) => {
-                if (location.pathname === "/") {
-                  e.preventDefault();
-                  document.getElementById("features")?.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
+              onClick={handleFeaturesClick}
             >
               Features
             </a>
-            <a
-              href="#faq"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            <Link
+              to="/faq"
+              className={`text-sm font-medium transition-colors ${
+                location.pathname === "/faq" ? "text-primary" : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               FAQ
-            </a>
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -109,19 +119,24 @@ const Navbar = () => {
                 Downloader
               </Link>
               <a
-                href="#features"
-                onClick={() => setIsOpen(false)}
+                href="/#features"
+                onClick={(e) => {
+                  handleFeaturesClick(e);
+                  setIsOpen(false);
+                }}
                 className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-secondary transition-all"
               >
                 Features
               </a>
-              <a
-                href="#faq"
+              <Link
+                to="/faq"
                 onClick={() => setIsOpen(false)}
-                className="px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:bg-secondary transition-all"
+                className={`px-4 py-3 rounded-lg text-sm font-medium transition-all ${
+                  location.pathname === "/faq" ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-secondary"
+                }`}
               >
                 FAQ
-              </a>
+              </Link>
               <div className="px-4 pt-2">
                 <Link to="/youtube" onClick={() => setIsOpen(false)}>
                   <Button variant="gradient" className="w-full">

@@ -126,13 +126,24 @@ const PlatformPage = ({ name, icon: Icon, color, description, features }: Platfo
                   <p className="text-sm text-muted-foreground mb-1">Video Title</p>
                   <p className="font-medium">Sample Video Title - {name} Content</p>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+                {/* Ad Banner - Above download buttons */}
+                <div className="flex justify-center mb-4">
+                  <AdBanner size="mobile" />
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                   {["1080p", "720p", "480p", "MP3"].map((quality) => (
                     <Button key={quality} variant="glass" className="w-full">
                       <Download className="w-4 h-4" />
                       {quality}
                     </Button>
                   ))}
+                </div>
+
+                {/* Ad Banner - Below download buttons */}
+                <div className="flex justify-center mt-4">
+                  <AdBanner size="mobile" />
                 </div>
               </motion.div>
             )}

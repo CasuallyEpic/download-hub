@@ -1,62 +1,105 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { Download, Link, Loader2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Link, Loader2, CheckCircle, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 
 const UrlInput = () => {
   const [url, setUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleDownload = () => {
     if (!url) return;
     setIsLoading(true);
-    // Simulate loading
-    setTimeout(() => setIsLoading(false), 2000);
+    setIsSuccess(false);
+    setTimeout(() => {
+      setIsLoading(false);
+      setIsSuccess(true);
+      setTimeout(() => setIsSuccess(false), 3000);
+    }, 2000);
   };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 }}
+      transition={{ duration: 0.5, delay: 0.3 }}
       className="w-full max-w-3xl mx-auto"
     >
-      <div className="gradient-border p-[1px] rounded-2xl glow-effect">
-        <div className="bg-card rounded-2xl p-2 flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 relative">
-            <Link className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <input
-              type="url"
-              placeholder="Paste your video link here..."
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              className="w-full h-14 pl-12 pr-4 bg-secondary/50 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-            />
+      <div className="relative">
+        {/* Glow effect behind input */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-primary via-[hsl(200,80%,50%)] to-accent rounded-2xl blur-lg opacity-30" />
+        
+        <div className="relative gradient-border p-[1px] rounded-2xl">
+          <div className="bg-card rounded-2xl p-2 flex flex-col sm:flex-row gap-3">
+            <div className="flex-1 relative group">
+              <Link className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <input
+                type="url"
+                placeholder="Paste your video link here..."
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleDownload()}
+                className="w-full h-14 pl-12 pr-4 bg-secondary/50 rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:bg-secondary/80 transition-all"
+              />
+            </div>
+            <Button
+              variant="gradient"
+              size="xl"
+              onClick={handleDownload}
+              disabled={isLoading || !url}
+              className="min-w-[160px] relative overflow-hidden"
+            >
+              <AnimatePresence mode="wait">
+                {isLoading ? (
+                  <motion.span
+                    key="loading"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Processing
+                  </motion.span>
+                ) : isSuccess ? (
+                  <motion.span
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex items-center gap-2"
+                  >
+                    <CheckCircle className="w-5 h-5" />
+                    Success!
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="default"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Download className="w-5 h-5" />
+                    Download
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Button>
           </div>
-          <Button
-            variant="gradient"
-            size="xl"
-            onClick={handleDownload}
-            disabled={isLoading || !url}
-            className="min-w-[160px]"
-          >
-            {isLoading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                Processing
-              </>
-            ) : (
-              <>
-                <Download className="w-5 h-5" />
-                Download
-              </>
-            )}
-          </Button>
         </div>
       </div>
-      <p className="text-center text-muted-foreground text-sm mt-4">
-        Supports YouTube, Facebook, Instagram, TikTok, Twitter & more
-      </p>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="flex items-center justify-center gap-2 text-muted-foreground text-sm mt-4"
+      >
+        <Sparkles className="w-4 h-4 text-primary" />
+        <span>Supports YouTube, Facebook, Instagram, TikTok, Twitter & more</span>
+      </motion.div>
     </motion.div>
   );
 };

@@ -89,11 +89,6 @@ const Testimonials = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Ad Banner */}
-        <div className="flex justify-center mt-16">
-          <AdBanner size="rectangle" />
-        </div>
       </div>
     </section>
   );

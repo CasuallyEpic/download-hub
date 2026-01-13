@@ -9,16 +9,18 @@ const footerLinks = {
     { name: "Instagram", path: "/instagram" },
     { name: "TikTok", path: "/tiktok" },
     { name: "Twitter", path: "/twitter" },
+    { name: "Vimeo", path: "/vimeo" },
+    { name: "Pinterest", path: "/pinterest" },
   ],
   legal: [
-    { name: "Privacy Policy", path: "#" },
-    { name: "Terms of Service", path: "#" },
-    { name: "DMCA", path: "#" },
+    { name: "Privacy Policy", path: "/privacy" },
+    { name: "Terms of Service", path: "/terms" },
+    { name: "DMCA", path: "/dmca" },
   ],
   support: [
-    { name: "FAQ", path: "#" },
-    { name: "Contact", path: "#" },
-    { name: "API", path: "#" },
+    { name: "FAQ", path: "/faq" },
+    { name: "Contact", path: "/contact" },
+    { name: "API", path: "/api" },
   ],
 };
 
@@ -71,9 +73,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <a href={link.path} className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                  <Link to={link.path} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -85,9 +87,9 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <a href={link.path} className="text-muted-foreground hover:text-primary transition-colors text-sm">
+                  <Link to={link.path} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

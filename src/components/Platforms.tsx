@@ -21,9 +21,9 @@ const platforms = [
   { name: "Instagram", icon: Instagram, color: "hsl(340, 75%, 54%)", path: "/instagram", downloads: "18M+", popular: true },
   { name: "Facebook", icon: Facebook, color: "hsl(221, 44%, 41%)", path: "/facebook", downloads: "12M+" },
   { name: "Twitter", icon: Twitter, color: "hsl(203, 89%, 53%)", path: "/twitter", downloads: "8M+" },
-  { name: "Vimeo", icon: Video, color: "hsl(195, 100%, 45%)", path: "/", downloads: "3M+" },
-  { name: "Dailymotion", icon: Play, color: "hsl(210, 100%, 50%)", path: "/", downloads: "2M+" },
-  { name: "Pinterest", icon: Film, color: "hsl(0, 78%, 45%)", path: "/", downloads: "5M+" },
+  { name: "Vimeo", icon: Video, color: "hsl(195, 100%, 45%)", path: "/vimeo", downloads: "3M+" },
+  { name: "Dailymotion", icon: Play, color: "hsl(210, 100%, 50%)", path: "/dailymotion", downloads: "2M+" },
+  { name: "Pinterest", icon: Film, color: "hsl(0, 78%, 45%)", path: "/pinterest", downloads: "5M+" },
 ];
 
 const Platforms = () => {

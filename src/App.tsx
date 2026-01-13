@@ -11,6 +11,15 @@ import Facebook from "./pages/Facebook";
 import Instagram from "./pages/Instagram";
 import TikTok from "./pages/TikTok";
 import Twitter from "./pages/Twitter";
+import Vimeo from "./pages/Vimeo";
+import Dailymotion from "./pages/Dailymotion";
+import Pinterest from "./pages/Pinterest";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import DMCA from "./pages/DMCA";
+import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
+import API from "./pages/API";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +39,15 @@ const App = () => (
             <Route path="/instagram" element={<Instagram />} />
             <Route path="/tiktok" element={<TikTok />} />
             <Route path="/twitter" element={<Twitter />} />
+            <Route path="/vimeo" element={<Vimeo />} />
+            <Route path="/dailymotion" element={<Dailymotion />} />
+            <Route path="/pinterest" element={<Pinterest />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/dmca" element={<DMCA />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/api" element={<API />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

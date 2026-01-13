@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import AdBanner from "./AdBanner";
 
 const testimonials = [
   {
@@ -87,6 +88,11 @@ const Testimonials = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Ad Banner */}
+        <div className="flex justify-center mt-16">
+          <AdBanner size="rectangle" />
         </div>
       </div>
     </section>

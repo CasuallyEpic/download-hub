@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Zap, Shield, Infinity, Smartphone, CloudOff, Settings2 } from "lucide-react";
+import AdBanner from "./AdBanner";
 
 const features = [
   {
@@ -40,19 +41,6 @@ const features = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-};
-
 const Features = () => {
   return (
     <section className="py-24 px-4 relative">
@@ -77,17 +65,14 @@ const Features = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {features.map((feature) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              variants={itemVariants}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
               className="group"
             >
               <div className="glass-card p-8 h-full relative overflow-hidden hover:border-primary/30 transition-all duration-300">
@@ -109,7 +94,13 @@ const Features = () => {
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Ad Banner */}
+        <div className="flex justify-center mt-16">
+          <AdBanner size="leaderboard" className="hidden md:flex" />
+          <AdBanner size="mobile" className="md:hidden" />
+        </div>
       </div>
     </section>
   );

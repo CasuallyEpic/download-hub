@@ -1,13 +1,19 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play, Sparkles, Users, Download, Globe } from "lucide-react";
-import UrlInput from "./UrlInput";
+import { ArrowRight, Play, Sparkles, Users, Download, Globe, Zap, Shield } from "lucide-react";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const stats = [
   { icon: Download, value: "50M+", label: "Downloads" },
   { icon: Users, value: "2M+", label: "Happy Users" },
   { icon: Globe, value: "1000+", label: "Sites Supported" },
+];
+
+const features = [
+  { icon: Zap, text: "Lightning Fast" },
+  { icon: Shield, text: "100% Safe" },
+  { icon: Download, text: "HD Quality" },
 ];
 
 const Hero = () => {
@@ -18,9 +24,9 @@ const Hero = () => {
         <img 
           src={heroBg} 
           alt="" 
-          className="w-full h-full object-cover opacity-30"
+          className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
       </div>
 
       {/* Animated grid pattern */}
@@ -45,14 +51,6 @@ const Hero = () => {
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-[120px]"
       />
-      <motion.div
-        animate={{ 
-          y: [10, -30, 10],
-          rotate: [0, 180, 360]
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/3 right-1/3 w-48 h-48 bg-[hsl(200,80%,50%)]/15 rounded-full blur-[80px]"
-      />
 
       <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
         {/* Badge */}
@@ -63,7 +61,7 @@ const Hero = () => {
         >
           <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 text-primary text-sm font-medium mb-8 backdrop-blur-sm">
             <Sparkles className="w-4 h-4" />
-            100% Free & Unlimited Downloads
+            #1 Video Downloader — 100% Free
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
           </span>
         </motion.div>
@@ -91,32 +89,46 @@ const Hero = () => {
           TikTok & 1000+ sites. No signup needed.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Feature pills */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-10"
         >
-          <Button variant="gradient" size="xl" className="group">
-            Start Downloading
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button variant="glass" size="xl" className="group">
-            <Play className="w-5 h-5" />
-            Watch Demo
-          </Button>
+          {features.map((feature) => (
+            <div key={feature.text} className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 backdrop-blur-sm border border-border/50">
+              <feature.icon className="w-4 h-4 text-primary" />
+              <span className="text-sm text-foreground">{feature.text}</span>
+            </div>
+          ))}
         </motion.div>
 
-        {/* URL Input */}
-        <UrlInput />
+        {/* CTA Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="flex flex-wrap justify-center gap-4 mb-16"
+        >
+          <Link to="/youtube">
+            <Button variant="gradient" size="xl" className="group">
+              Start Downloading Free
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+          <Button variant="glass" size="xl" className="group" onClick={() => document.getElementById('platforms')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Play className="w-5 h-5" />
+            Explore Platforms
+          </Button>
+        </motion.div>
 
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
+          className="grid grid-cols-3 gap-8 max-w-2xl mx-auto"
         >
           {stats.map((stat, index) => (
             <motion.div

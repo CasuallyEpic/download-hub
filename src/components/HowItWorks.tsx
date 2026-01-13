@@ -1,23 +1,26 @@
 import { motion } from "framer-motion";
-import { Link, Search, Download, Check } from "lucide-react";
+import { Link, Search, Download, Check, ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
+import { Link as RouterLink } from "react-router-dom";
+import AdBanner from "./AdBanner";
 
 const steps = [
   {
     step: 1,
-    title: "Paste the Link",
-    description: "Copy the video URL from any supported platform and paste it into the input field.",
-    icon: Link,
-  },
-  {
-    step: 2,
-    title: "Analyze Video",
-    description: "Our system detects the platform and fetches all available quality options instantly.",
+    title: "Choose Platform",
+    description: "Select your platform from YouTube, TikTok, Instagram, and more.",
     icon: Search,
   },
   {
+    step: 2,
+    title: "Paste the Link",
+    description: "Copy the video URL and paste it into our downloader.",
+    icon: Link,
+  },
+  {
     step: 3,
-    title: "Download",
-    description: "Choose your preferred quality and download the video directly to your device.",
+    title: "Download & Enjoy",
+    description: "Choose quality and download directly to your device.",
     icon: Download,
   },
 ];
@@ -98,6 +101,27 @@ const HowItWorks = () => {
             </div>
           ))}
         </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-12 text-center"
+        >
+          <RouterLink to="/youtube">
+            <Button variant="gradient" size="xl" className="group">
+              Try It Now — It's Free
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </RouterLink>
+        </motion.div>
+
+        {/* Ad Banner */}
+        <div className="flex justify-center mt-16">
+          <AdBanner size="rectangle" />
+        </div>
       </div>
     </section>
   );
